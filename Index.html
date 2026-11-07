@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Lexique Élégant - Mots Rares & Sophistiqués</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display (Serif), Inter (Sans-serif), Fira Code (Phonetics) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        paper: '#F7F4EC',
+                        cardBg: '#FFFDF9',
+                        ink: '#1C1917',
+                        inkLight: '#57534E',
+                        gold: '#B45309',
+                        goldLight: '#F59E0B',
+                        burgundy: '#7F1D1D',
+                        borderPaper: '#E7E2D5'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    boxShadow: {
+                        card: '0 10px 30px -5px rgba(28, 25, 23, 0.08), 0 4px 6px -2px rgba(28, 25, 23, 0.03)',
+                        cardHover: '0 20px 40px -10px rgba(28, 25, 23, 0.12), 0 8px 10px -4px rgba(28, 25, 23, 0.05)',
+                        innerPaper: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.03)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Modern Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F4EC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D6CEBE;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B45309;
+        }
+
+        /* Flipping / Card Transition Animation */
+        .card-animate {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-enter {
+            opacity: 0;
+            transform: translateY(16px) scale(0.98);
+        }
+        .card-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Subtle paper texture overlay pattern */
+        .bg-paper-texture {
+            background-color: #FDFBF7;
+            background-image: radial-gradient(#E7E2D5 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+        }
+    </style>
+</head>
+<body class="bg-paper-texture text-ink font-sans min-h-full flex flex-col justify-between selection:bg-gold/20 selection:text-gold">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-cream/90 backdrop-blur-md border-b border-borderPaper transition-all">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-ink text-cream flex items-center justify-center font-serif text-2xl font-bold shadow-md">
+                    L
+                </div>
+                <div>
+                    <h1 class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-ink leading-none">
+                        Le Lexique <span class="text-gold italic font-normal">Rare</span>
+                    </h1>
+                    <p class="text-xs text-inkLight tracking-widest uppercase font-medium mt-1">Dictionnaire Érudit</p>
+                </div>
+            </div>
+
+            <!-- Nav Tabs -->
+            <nav class="flex items-center bg-paper p-1 rounded-xl border border-borderPaper shadow-innerPaper">
+                <button id="nav-explore" onclick="switchTab('explore')" class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-ink bg-cardBg shadow-sm">
+                    <i class="fa-solid font-normal fa-compass mr-1.5 text-gold">="></i>Explorer
+                </button>
+                <button id="nav-favorites" onclick="switchTab('favorites')" class="px-4 py-2 rounded-lg text-sm font-medium text-inkLight hover:text-ink transition-all duration-200 relative">
+                    <i class="fa-solid fa-bookmark mr-1.5 text-gold"></i>Favoris
+                    <span id="fav-badge" class="ml-1.5 px-1.5 py-0.5 text-xs bg-burgundy text-white rounded-full font-sans font-bold transition-all">0</span>
+                </button>
+                <button id="nav-dictionary" onclick="switchTab('dictionary')" class="px-4 py-2 rounded-lg text-sm font-medium text-inkLight hover:text-ink transition-all duration-200">
+                    <i class="fa-solid fa-book-open mr-1.5 text-gold"></i>Index
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto w-full px-4 sm:px-6 py-8 flex-grow flex flex-col justify-center">
+        
+        <!-- SECTION 1: EXPLORER / FLASHCARD GENERATOR -->
+        <section id="section-explore" class="space-y-6">
+            <!-- Top Controls -->
+            <div class="flex flex-wrap items-center justify-between gap-4 bg-cardBg p-4 rounded-2xl border border-borderPaper shadow-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs uppercase font-semibold text-inkLight tracking-wider">Total en base :</span>
+                    <span id="total-count-badge" class="px-2.5 py-0.5 rounded-full bg-paper font-mono text-xs font-bold text-gold border border-borderPaper">0 mots</span>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <button onclick="openAddWordModal()" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-paper hover:bg-borderPaper/50 border border-borderPaper text-ink transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus text-gold"></i> Ajouter un mot
+                    </button>
+                    <button id="btn-speak-main" onclick="speakCurrentWord()" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-paper hover:bg-borderPaper/50 border border-borderPaper text-ink transition flex items-center gap-2">
+                        <i class="fa-solid fa-volume-high text-gold"></i> Écouter
+                    </button>
+                </div>
+            </div>
+
+            <!-- MAIN FLASHCARD -->
+            <div class="relative group">
+                <div id="flashcard" class="card-animate card-active bg-cardBg border-2 border-borderPaper rounded-3xl p-6 sm:p-10 shadow-card relative overflow-hidden flex flex-col justify-between min-h-[420px]">
+                    
+                    <!-- Decorative corner watermark / emblem -->
+                    <div class="absolute -top-12 -right-12 w-40 h-40 bg-gold/5 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute top-6 right-6 flex items-center gap-3 z-10">
+                        <button id="btn-fav-toggle" onclick="toggleFavoriteCurrent()" title="Ajouter aux favoris" class="w-12 h-12 rounded-2xl bg-paper border border-borderPaper flex items-center justify-center text-inkLight hover:text-burgundy transition-all duration-300 hover:scale-110 shadow-sm">
+                            <i id="fav-icon" class="fa-regular fa-bookmark text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card Header Info -->
+                    <div>
+                        <!-- Word Category Tag -->
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-paper border border-borderPaper text-xs font-medium text-inkLight mb-6">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span id="card-gram" class="capitalize font-serif italic text-sm">nom masculin</span>
+                        </div>
+
+                        <!-- Word Main Display -->
+                        <h2 id="card-word" class="font-serif text-4xl sm:text-6xl font-black tracking-tight text-burgundy mb-3 leading-none">
+                            AGÉLASTE
+                        </h2>
+
+                        <!-- Phonetic IPA Transcription -->
+                        <div class="flex items-center gap-3 mb-8">
+                            <span id="card-phonetic" class="font-mono text-base sm:text-lg text-inkLight bg-paper/80 px-3 py-1 rounded-lg border border-borderPaper">
+                                / a.ʒə.last /
+                            </span>
+                            <button onclick="speakCurrentWord()" class="text-inkLight hover:text-gold transition text-sm p-1.5" title="Prononcer">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+
+                        <hr class="border-borderPaper/70 mb-8">
+
+                        <!-- Word Definition -->
+                        <div class="space-y-3">
+                            <h3 class="text-xs uppercase font-bold tracking-widest text-gold">Définition & Sens</h3>
+                            <p id="card-definition" class="text-lg sm:text-xl text-ink leading-relaxed font-sans font-normal">
+                                Une personne agélaste est quelqu'un qui n'a aucun humour. C'est une personne très sérieuse, qui ne rit jamais, même face à des situations amusantes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Word Usage Example -->
+                    <div class="mt-8 pt-6 border-t border-borderPaper/50 bg-paper/50 -mx-6 -mb-6 sm:-mx-10 sm:-mb-10 p-6 sm:p-8 rounded-b-3xl">
+                        <h4 class="text-xs uppercase font-bold tracking-widest text-inkLight mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-quote-left text-gold/70"></i> Exemple d'usage en contexte
+                        </h4>
+                        <p id="card-example" class="font-serif italic text-inkLight text-base sm:text-lg leading-relaxed">
+                            « Malgré l'atmosphère festive du salon, le vieil érudit demeura agélaste toute la soirée. »
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Action Controls -->
+            <div class="flex items-center justify-center gap-4 pt-2">
+                <button onclick="getRandomWord()" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-ink hover:bg-gold text-cream font-medium text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 transform active:scale-95 group">
+                    <i class="fa-solid fa-shuffle transition-transform group-hover:rotate-180"></i>
+                    <span>Tirer un mot aléatoire</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FAVORITES LIST -->
+        <section id="section-favorites" class="hidden space-y-6">
+            <div class="flex items-center justify-between border-b border-borderPaper pb-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-ink">Mes Mots Favoris</h2>
+                    <p class="text-sm text-inkLight mt-1">Vos pépites linguistiques mémorisées et conservées.</p>
+                </div>
+                <button onclick="clearAllFavorites()" id="btn-clear-favs" class="text-xs font-semibold text-burgundy hover:text-red-700 underline px-3 py-1.5 rounded-lg hover:bg-burgundy/5 transition">
+                    Tout effacer
+                </button>
+            </div>
+
+            <!-- Empty Favorites State -->
+            <div id="fav-empty-state" class="text-center py-16 bg-cardBg rounded-3xl border border-dashed border-borderPaper p-8 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-paper flex items-center justify-center mx-auto text-gold text-2xl">
+                    <i class="fa-regular fa-bookmark"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-ink">Aucun mot en favoris pour le moment</h3>
+                <p class="text-sm text-inkLight max-w-md mx-auto">
+                    Parcourez le dictionnaire ou utilisez le générateur aléatoire et cliquez sur l'icône de marque-page pour sauvegarder les expressions qui vous inspirent.
+                </p>
+                <button onclick="switchTab('explore')" class="px-5 py-2.5 bg-ink text-cream font-medium text-sm rounded-xl hover:bg-gold transition shadow-sm">
+                    Découvrir des mots
+                </button>
+            </div>
+
+            <!-- Favorites Grid Container -->
+            <div id="fav-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dynamic Favorited Cards inserted here -->
+            </div>
+        </section>
+
+        <!-- SECTION 3: FULL DICTIONARY INDEX -->
+        <section id="section-dictionary" class="hidden space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-borderPaper pb-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold text-ink">Index Du Vocabulaire</h2>
+                    <p class="text-sm text-inkLight mt-1">Explorez l'intégralité de la collection d'expressions érudites.</p>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative w-full sm:w-72">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-inkLight text-sm"></i>
+                    <input type="text" id="dict-search" oninput="filterDictionary()" placeholder="Rechercher un mot..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cardBg border border-borderPaper text-sm text-ink placeholder-inkLight/60 focus:outline-none focus:ring-2 focus:ring-gold/50 transition">
+                </div>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap items-center gap-2 text-xs font-medium" id="category-filters">
+                <button onclick="filterCategory('all')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-ink text-cream transition" data-cat="all">Tous</button>
+                <button onclick="filterCategory('nom')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-paper border border-borderPaper text-ink hover:bg-borderPaper/50 transition" data-cat="nom">Noms</button>
+                <button onclick="filterCategory('adjectif')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-paper border border-borderPaper text-ink hover:bg-borderPaper/50 transition" data-cat="adjectif">Adjectifs</button>
+            </div>
+
+            <!-- Dictionary Grid List -->
+            <div id="dict-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dynamic Dictionary Items -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 border-t border-borderPaper bg-cream py-6 text-center text-xs text-inkLight">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="font-serif italic">Le Lexique Élégant — Culture & Amour de la Langue Française</p>
+            <p class="font-mono text-[11px]">Enregistrement local dans le navigateur</p>
+        </div>
+    </footer>
+
+    <!-- ADD WORD MODAL -->
+    <div id="modal-add-word" class="fixed inset-0 bg-ink/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-borderPaper rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-6 relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeAddWordModal()" class="absolute top-6 right-6 text-inkLight hover:text-ink text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div>
+                <h3 class="font-serif text-2xl font-bold text-burgundy">Ajouter un nouveau mot</h3>
+                <p class="text-xs text-inkLight mt-1">Enrichissez votre lexique personnel avec vos propres découvertes.</p>
+            </div>
+
+            <form id="form-add-word" onsubmit="handleAddNewWord(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gold tracking-wider mb-1">Mot</label>
+                    <input type="text" id="input-word" required placeholder="ex: Céruléen" class="w-full px-4 py-2.5 rounded-xl bg-paper border border-borderPaper text-sm focus:outline-none focus:ring-2 focus:ring-gold">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs uppercase font-bold text-gold tracking-wider mb-1">Phonétique (API)</label>
+                        <input type="text" id="input-phonetic" placeholder="ex: / se.ry.le.ɛ̃ /" class="w-full px-4 py-2.5 rounded-xl bg-paper border border-borderPaper text-sm font-mono focus:outline-none focus:ring-2 focus:ring-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-bold text-gold tracking-wider mb-1">Catégorie</label>
+                        <select id="input-gram" class="w-full px-4 py-2.5 rounded-xl bg-paper border border-borderPaper text-sm focus:outline-none focus:ring-2 focus:ring-gold">
+                            <option value="adjectif">Adjectif</option>
+                            <option value="nom masculin">Nom masculin</option>
+                            <option value="nom féminin">Nom féminin</option>
+                            <option value="verbe">Verbe</option>
+                            <option value="adverbe">Adverbe</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gold tracking-wider mb-1">Définition</label>
+                    <textarea id="input-definition" required rows="3" placeholder="Explication précise du sens du mot..." class="w-full px-4 py-2.5 rounded-xl bg-paper border border-borderPaper text-sm focus:outline-none focus:ring-2 focus:ring-gold"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase font-bold text-gold tracking-wider mb-1">Exemple d'usage</label>
+                    <textarea id="input-example" rows="2" placeholder="« Phrase illustrant le mot en contexte... »" class="w-full px-4 py-2.5 rounded-xl bg-paper border border-borderPaper text-sm italic focus:outline-none focus:ring-2 focus:ring-gold"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" onclick="closeAddWordModal()" class="px-4 py-2.5 text-xs font-semibold rounded-xl bg-paper hover:bg-borderPaper/50 border border-borderPaper text-ink">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 text-xs font-semibold rounded-xl bg-ink text-cream hover:bg-gold transition shadow-md">
+                        Enregistrer le mot
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-ink text-cream px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-medium transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none border border-gold/30">
+        <i id="toast-icon" class="fa-solid fa-check-circle text-gold"></i>
+        <span id="toast-message">Action effectuée</span>
+    </div>
+
+    <!-- APPLICATION LOGIC JS -->
+    <script>
+        // Initial Dataset of 30 Sophisticated French Words
+        const defaultWords = [
+            {
+                id: 'agelaste',
+                word: 'AGÉLASTE',
+                phonetic: '/ a.ʒə.last /',
+                gram: 'nom ou adjectif',
+                definition: 'Une personne agélaste est quelqu\'un qui n\'a aucun humour. C\'est une personne très sérieuse, qui ne rit jamais, même face à des situations légèrement amusantes.',
+                example: '« Malgré l\'atmosphère festive du salon littéraire, le vieil érudit demeura agélaste toute la soirée. »'
+            },
+            {
+                id: 'terpsichoreen',
+                word: 'TERPSICHORÉEN',
+                phonetic: '/ tɛʁp.si.kɔ.ʁe.ɛ̃ /',
+                gram: 'adjectif',
+                definition: 'Qui a rapport à la danse, à son art, à son mouvement gracieux. Se dit d\'un style, d\'un geste ou d\'une performance chorégraphique d\'une grande élégance.',
+                example: '« Elle s\'avançait sur la scène avec une grâce terpsichoréenne qui subjugua le public en un instant. »'
+            },
+            {
+                id: 'systaltique',
+                word: 'SYSTALTIQUE',
+                phonetic: '/ sis.tal.tik /',
+                gram: 'adjectif',
+                definition: 'Se dit d\'un mouvement rythmique, en particulier des contractions et dilatations successives du cœur et des artères.',
+                example: '« Le rythme systaltique de la musique électronique résonnait comme les battements d\'un cœur géant. »'
+            },
+            {
+                id: 'accointance',
+                word: 'ACCOINTANCE',
+                phonetic: '/ a.kwɛ̃.tɑ̃s /',
+                gram: 'nom féminin',
+                definition: 'Relation d\'amitié superficielle ou de fréquentation régulière, souvent liée à un intérêt commun ou à un milieu social précis.',
+                example: '« Ses accointances avec le milieu artistique parisien lui ouvrirent sans peine les portes des plus galeries. »'
+            },
+            {
+                id: 'dilatoire',
+                word: 'DILATOIRE',
+                phonetic: '/ di.la.twaʁ /',
+                gram: 'adjectif',
+                definition: 'Qui vise à gagner du temps, à retarder une décision, une réponse ou un jugement.',
+                example: '« L\'avocat multipliait les manœuvres dilatoires pour différer le verdict de quelques semaines. »'
+            },
+            {
+                id: 'vesperal',
+                word: 'VESPÉRAL',
+                phonetic: '/ vɛs.pe.ʁal /',
+                gram: 'adjectif',
+                definition: 'Qui a lieu le soir, qui appartient au soir ou au crépuscule.',
+                example: '« La fraîcheur vespérale apaisait la chaleur étouffante qui avait régné toute la journée. »'
+            },
+            {
+                id: 'marasme',
+                word: 'MARASME',
+                phonetic: '/ ma.ʁasm /',
+                gram: 'nom masculin',
+                definition: 'Période de stagnation, de langueur ou de dépression morale, économique ou intellectuelle.',
+                example: '« L\'entreprise s\'efforçait de sortir du marasme économique dans lequel elle s\'enfonçait depuis deux ans. »'
+            },
+            {
+                id: 'soliloque',
+                word: 'SOLILOQUE',
+                phonetic: '/ sɔ.li.lɔk /',
+                gram: 'nom masculin',
+                definition: 'Discours d\'une personne qui se parle à elle-même ou monologue intérieur prononcé à voix haute.',
+                example: '« Absorbé dans son soliloque, il ne s\'était pas rendu compte que toute la pièce l\'écoutait. »'
+            },
+            {
+                id: 'captieux',
+                word: 'CAPTIEUX',
+                phonetic: '/ kap.sjø /',
+                gram: 'adjectif',
+                definition: 'Qui cherche à tromper ou à induire en erreur sous des apparences de vérité et de séduction.',
+                example: '« Méfiez-vous de ses arguments captieux, ils sont formulés pour vous séduire sans rien prouver. »'
+            },
+            {
+                id: 'evanescent',
+                word: 'ÉVANESCENT',
+                phonetic: '/ e.va.nɛs.sɑ̃ /',
+                gram: 'adjectif',
+                definition: 'Qui disparaît peu à peu, qui s\'efface doucement comme une fumée ou un souvenir fugace.',
+                example: '« Les couleurs évanescentes du couchant laissaient place aux ombres de la nuit. »'
+            },
+            {
+                id: 'hypotypose',
+                word: 'HYPOTYPOSE',
+                phonetic: '/ i.pɔ.ti.poz /',
+                gram: 'nom féminin',
+                definition: 'Figure de style qui peint une scène de manière si vivante et animée qu\'elle semble se dérouler sous les yeux du lecteur.',
+                example: '« Grâce à une hypotypose saisissante, le romancier fit ressentir toute l\'intensité du combat. »'
+            },
+            {
+                id: 'pusillanime',
+                word: 'PUSILLANIME',
+                phonetic: '/ py.zi.la.nim /',
+                gram: 'adjectif ou nom',
+                definition: 'Qui manque d\'audace, de courage et de fermeté. Se dit d\'une personne craintive devant la moindre difficulté.',
+                example: '« Face aux responsabilités du poste, son comportement pusillanime déçut ses collaborateurs. »'
+            },
+            {
+                id: 'aboulie',
+                word: 'ABOULIE',
+                phonetic: '/ a.bu.li /',
+                gram: 'nom féminin',
+                definition: 'Incapacité pathologique ou extrême à prendre des décisions ou à passer à l\'action.',
+                example: '« Plongé dans une profonde aboulie, il passait ses journées à hésiter sans jamais concrétiser ses projets. »'
+            },
+            {
+                id: 'thaumaturge',
+                word: 'THAUMATURGE',
+                phonetic: '/ to.ma.tyʁʒ /',
+                gram: 'nom ou adjectif',
+                definition: 'Personne qui prétend accomplir des miracles ou des guérisons extraordinaires.',
+                example: '« La légende populaire attribuait à ce saint ermite des dons de thaumaturge. »'
+            },
+            {
+                id: 'nycthemere',
+                word: 'NYCTHÉMÈRE',
+                phonetic: '/ nik.te.mɛʁ /',
+                gram: 'nom masculin',
+                definition: 'Unité de temps de 24 heures correspondant à un cycle complet d\'un jour et d\'une nuit.',
+                example: '« Les rythmes biologiques du corps humain s\'organisent principalement autour du nycthémère. »'
+            },
+            {
+                id: 'callipyge',
+                word: 'CALLIPYGE',
+                phonetic: '/ ka.li.piʒ /',
+                gram: 'adjectif',
+                definition: 'Qui possède de belles fesses harmonieuses et bien sculptées (d\'abord employé pour les statues antiques).',
+                example: '« La statue de Vénus callipyge attirait le regard des visiteurs du musée par l\'harmonie de ses formes. »'
+            },
+            {
+                id: 'coruscant',
+                word: 'CORUSCANT',
+                phonetic: '/ kɔ.ʁys.kɑ̃ /',
+                gram: 'adjectif',
+                definition: 'Qui brille d\'un éclat vif, étincelant et scintillant.',
+                example: '« La reine portait une couronne coruscante de diamants sous les lustres du palais. »'
+            },
+            {
+                id: 'dichotomie',
+                word: 'DICHOTOMIE',
+                phonetic: '/ di.kɔ.tɔ.mi /',
+                gram: 'nom féminin',
+                definition: 'Division ou opposition claire et tranchée entre deux éléments contraires.',
+                example: '« Il existe une dichotomie évidente entre ses discours idéalistes et ses actions pragmatiques. »'
+            },
+            {
+                id: 'ataraxie',
+                word: 'ATARAXIE',
+                phonetic: '/ a.ta.ʁak.si /',
+                gram: 'nom féminin',
+                definition: 'Tranquillité d\'âme absolue, absence totale de trouble ou de passion (idéal des stoïciens et épicuriens).',
+                example: '« Par la méditation quotidienne, le sage recherchait une ataraxie inébranlable. »'
+            },
+            {
+                id: 'eristique',
+                word: 'ÉRISTIQUE',
+                phonetic: '/ e.ʁis.tik /',
+                gram: 'adjectif ou nom',
+                definition: 'Qui a rapport à la joute verbale et à la controverse; art de disputer en cherchant la victoire plutôt que la vérité.',
+                example: '« Le débat tourna à l\'exercice éristique où chacun cherchait seulement à triompher de son rival. »'
+            },
+            {
+                id: 'palimpseste',
+                word: 'PALIMPSESTE',
+                phonetic: '/ pa.lɛ̃p.sɛst /',
+                gram: 'nom masculin',
+                definition: 'Parchemin dont on a effacé la première écriture pour en réécrire une autre, mais où l\'ancienne reste visible par transparence.',
+                example: '« La ville historique est un véritable palimpseste où chaque époque a laissé ses traces superposées. »'
+            },
+            {
+                id: 'antepenultieme',
+                word: 'ANTÉPÉNULTIÈME',
+                phonetic: '/ ɑ̃.te.pe.nyl.tjɛm /',
+                gram: 'adjectif ou nom',
+                definition: 'Qui précède immédiatement l\'avant-dernier (le troisième en partant de la fin).',
+                example: '« L\'équipe a marqué un but décisif à l\'antépénultième minute du match. »'
+            },
+            {
+                id: 'proteiforme',
+                word: 'PROTÉIFORME',
+                phonetic: '/ pʁɔ.te.i.fɔʁm /',
+                gram: 'adjectif',
+                definition: 'Qui peut prendre des formes extrêmement variées ou changer fréquemment d\'apparence.',
+                example: '« Cet artiste accompli déploie un talent protéiforme à travers la peinture, la sculpture et le théâtre. »'
+            },
+            {
+                id: 'hedonisme',
+                word: 'HÉDONISME',
+                phonetic: '/ e.dɔ.nism /',
+                gram: 'nom masculin',
+                definition: 'Doctrine philosophique qui fait du plaisir le but suprême de la vie et le souverain bien.',
+                example: '« Son hédonisme assumé le poussait à savourer chaque instant sans se préoccuper du lendemain. »'
+            },
+            {
+                id: 'acrimonie',
+                word: 'ACRIMONIE',
+                phonetic: '/ a.kʁi.mɔ.ni /',
+                gram: 'nom féminin',
+                definition: 'Humeur aigre, mauvaise grâce qui se manifeste par des paroles blessantes ou hargneuses.',
+                example: '« Il répondit aux critiques avec une acrimonie qui surprit la table de réunion. »'
+            },
+            {
+                id: 'serendipite',
+                word: 'SÉRENDIPITÉ',
+                phonetic: '/ se.ʁɑ̃.di.pi.te /',
+                gram: 'nom féminin',
+                definition: 'Faculté de découvrir par hasard et sagacité des choses précieuses ou utiles qu\'on ne cherchait pas.',
+                example: '« C\'est grâce à la sérendipité que la pénicilline a été découverte par Alexander Fleming. »'
+            },
+            {
+                id: 'petrichor',
+                word: 'PÉTRICHOR',
+                phonetic: '/ pe.tʁi.kɔʁ /',
+                gram: 'nom masculin',
+                definition: 'Odeur particulière, fraîche et terreuse, que exhale la terre sèche après avoir été frappée par la pluie.',
+                example: '« L\'odeur envoûtante du pétrichor s\'élevait du jardin juste après le premier orage d\'été. »'
+            },
+            {
+                id: 'quintessence',
+                word: 'QUINTESSENCE',
+                phonetic: '/ kɛ̃.tɛs.sɑ̃s /',
+                gram: 'nom féminin',
+                definition: 'Ce qu\'il y a de plus subtil, de plus parfait et de plus essentiel dans une chose.',
+                example: '« Ce poème court représente la quintessence du romantisme français. »'
+            },
+            {
+                id: 'chimerique',
+                word: 'CHIMÉRIQUE',
+                phonetic: '/ ʃi.me.ʁik /',
+                gram: 'adjectif',
+                definition: 'Qui est sans fondement réel, irréalisable et qui relève uniquement de l\'imagination pure.',
+                example: '« Il poursuivait le rêve chimérique de construire une machine au mouvement perpétuel. »'
+            },
+            {
+                id: 'obequial',
+                word: 'OBÉQUIAL',
+                phonetic: '/ ɔ.be.kɥi.al /',
+                gram: 'adjectif',
+                definition: 'Relatif au salut, aux salutations cérémonieuses ou à l\'action d\'exprimer son respect avec déférence.',
+                example: '« Le diplomate adressa au monarque une inclinaison obéquiale empreinte d\'une solennité absolue. »'
+            }
+        ];
+
+        // App State Management
+        let wordsDeck = [];
+        let favoriteIds = [];
+        let currentWord = null;
+        let activeTab = 'explore';
+        let currentCategoryFilter = 'all';
+
+        // Initialize Application
+        window.addEventListener('DOMContentLoaded', () => {
+            loadLocalStorage();
+            updateFavBadge();
+            updateTotalBadge();
+            getRandomWord();
+            renderDictionary();
+            renderFavorites();
+        });
+
+        // Local Storage Helpers
+        function loadLocalStorage() {
+            const storedFavs = localStorage.getItem('lexique_favorites');
+            if (storedFavs) {
+                try { favoriteIds = JSON.parse(storedFavs); } catch (e) { favoriteIds = []; }
+            }
+
+            const customWords = localStorage.getItem('lexique_custom_words');
+            let addedWords = [];
+            if (customWords) {
+                try { addedWords = JSON.parse(customWords); } catch (e) { addedWords = []; }
+            }
+
+            wordsDeck = [...defaultWords, ...addedWords];
+        }
+
+        function saveFavorites() {
+            localStorage.setItem('lexique_favorites', JSON.stringify(favoriteIds));
+            updateFavBadge();
+        }
+
+        function saveCustomWords(newWordObj) {
+            const customWords = localStorage.getItem('lexique_custom_words');
+            let addedWords = [];
+            if (customWords) {
+                try { addedWords = JSON.parse(customWords); } catch (e) {}
+            }
+            addedWords.push(newWordObj);
+            localStorage.setItem('lexique_custom_words', JSON.stringify(addedWords));
+            wordsDeck.push(newWordObj);
+            updateTotalBadge();
+            renderDictionary();
+        }
+
+        // Navigation & Tabs
+        function switchTab(tab) {
+            activeTab = tab;
+
+            const secExplore = document.getElementById('section-explore');
+            const secFavs = document.getElementById('section-favorites');
+            const secDict = document.getElementById('section-dictionary');
+
+            const navExplore = document.getElementById('nav-explore');
+            const navFavs = document.getElementById('nav-favorites');
+            const navDict = document.getElementById('nav-dictionary');
+
+            // Reset Tab styles
+            [navExplore, navFavs, navDict].forEach(b => {
+                b.className = "px-4 py-2 rounded-lg text-sm font-medium text-inkLight hover:text-ink transition-all duration-200 relative";
+            });
+
+            secExplore.classList.add('hidden');
+            secFavs.classList.add('hidden');
+            secDict.classList.add('hidden');
+
+            if (tab === 'explore') {
+                secExplore.classList.remove('hidden');
+                navExplore.className = "px-4 py-2 rounded-lg text-sm font-medium text-ink bg-cardBg shadow-sm transition-all duration-200";
+            } else if (tab === 'favorites') {
+                secFavs.classList.remove('hidden');
+                navFavs.className = "px-4 py-2 rounded-lg text-sm font-medium text-ink bg-cardBg shadow-sm transition-all duration-200 relative";
+                renderFavorites();
+            } else if (tab === 'dictionary') {
+                secDict.classList.remove('hidden');
+                navDict.className = "px-4 py-2 rounded-lg text-sm font-medium text-ink bg-cardBg shadow-sm transition-all duration-200";
+                renderDictionary();
+            }
+        }
+
+        // Random Card Display Logic
+        function getRandomWord() {
+            if (wordsDeck.length === 0) return;
+            
+            // Pick a random word (try not to repeat current if possible)
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * wordsDeck.length);
+            } while (wordsDeck.length > 1 && wordsDeck[randomIndex].id === currentWord?.id);
+
+            currentWord = wordsDeck[randomIndex];
+            displayCard(currentWord);
+        }
+
+        function displayCard(wordObj) {
+            currentWord = wordObj;
+            const cardEl = document.getElementById('flashcard');
+
+            // Animation transition
+            cardEl.classList.remove('card-active');
+            cardEl.classList.add('card-enter');
+
+            setTimeout(() => {
+                document.getElementById('card-word').textContent = wordObj.word;
+                document.getElementById('card-phonetic').textContent = wordObj.phonetic || '';
+                document.getElementById('card-gram').textContent = wordObj.gram || '';
+                document.getElementById('card-definition').textContent = wordObj.definition;
+                document.getElementById('card-example').textContent = wordObj.example ? `${wordObj.example}` : '';
+
+                updateFavButtonState();
+
+                cardEl.classList.remove('card-enter');
+                cardEl.classList.add('card-active');
+            }, 150);
+        }
+
+        // Speech Synthesis Audio
+        function speakCurrentWord() {
+            if (!currentWord || !('speechSynthesis' in window)) {
+                showToast("La synthèse vocale n'est pas disponible sur ce navigateur.", "fa-exclamation-triangle");
+                return;
+            }
+
+            window.speechSynthesis.cancel(); // Stop ongoing speech
+            const utterance = new SpeechSynthesisUtterance(currentWord.word.toLowerCase());
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.85; // Slightly slower for crisp articulation
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakSpecificWord(wordText) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(wordText.toLowerCase());
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.85;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Favorite Toggle System
+        function toggleFavoriteCurrent() {
+            if (!currentWord) return;
+            toggleFavorite(currentWord.id);
+            updateFavButtonState();
+        }
+
+        function toggleFavorite(id) {
+            const index = favoriteIds.indexOf(id);
+            if (index > -1) {
+                favoriteIds.splice(index, 1);
+                showToast("Mot retiré des favoris", "fa-bookmark");
+            } else {
+                favoriteIds.push(id);
+                showToast("Mot ajouté à vos favoris !", "fa-heart");
+            }
+            saveFavorites();
+
+            // Refresh UI views if active
+            if (activeTab === 'favorites') renderFavorites();
+            if (activeTab === 'dictionary') renderDictionary();
+        }
+
+        function updateFavButtonState() {
+            if (!currentWord) return;
+            const isFav = favoriteIds.includes(currentWord.id);
+            const icon = document.getElementById('fav-icon');
+            const btn = document.getElementById('btn-fav-toggle');
+
+            if (isFav) {
+                icon.className = "fa-solid fa-bookmark text-xl text-burgundy";
+                btn.classList.add('bg-burgundy/10', 'border-burgundy/30');
+            } else {
+                icon.className = "fa-regular fa-bookmark text-xl text-inkLight";
+                btn.classList.remove('bg-burgundy/10', 'border-burgundy/30');
+            }
+        }
+
+        function updateFavBadge() {
+            const badge = document.getElementById('fav-badge');
+            badge.textContent = favoriteIds.length;
+        }
+
+        function updateTotalBadge() {
+            const badge = document.getElementById('total-count-badge');
+            badge.textContent = `${wordsDeck.length} mots`;
+        }
+
+        function clearAllFavorites() {
+            if (favoriteIds.length === 0) return;
+            favoriteIds = [];
+            saveFavorites();
+            renderFavorites();
+            showToast("Tous vos favoris ont été effacés", "fa-trash");
+        }
+
+        // Render Favorites List
+        function renderFavorites() {
+            const container = document.getElementById('fav-grid');
+            const emptyState = document.getElementById('fav-empty-state');
+            const clearBtn = document.getElementById('btn-clear-favs');
+
+            const favWords = wordsDeck.filter(w => favoriteIds.includes(w.id));
+
+            if (favWords.length === 0) {
+                emptyState.classList.remove('hidden');
+                container.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.classList.remove('hidden');
+            clearBtn.classList.remove('hidden');
+
+            container.innerHTML = favWords.map(w => createMiniCardHTML(w, true)).join('');
+        }
+
+        // Render Full Dictionary Index
+        function renderDictionary() {
+            const container = document.getElementById('dict-grid');
+            const searchVal = document.getElementById('dict-search')?.value.toLowerCase().trim() || '';
+
+            let filtered = wordsDeck;
+
+            // Apply Category filter
+            if (currentCategoryFilter === 'nom') {
+                filtered = filtered.filter(w => w.gram.toLowerCase().includes('nom'));
+            } else if (currentCategoryFilter === 'adjectif') {
+                filtered = filtered.filter(w => w.gram.toLowerCase().includes('adjectif'));
+            }
+
+            // Apply Search Query
+            if (searchVal) {
+                filtered = filtered.filter(w => 
+                    w.word.toLowerCase().includes(searchVal) || 
+                    w.definition.toLowerCase().includes(searchVal)
+                );
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-inkLight bg-cardBg rounded-2xl border border-borderPaper">
+                        <i class="fa-solid fa-magnifying-glass text-2xl mb-2 text-gold"></i>
+                        <p class="font-serif font-bold text-base">Aucun résultat trouvé</p>
+                        <p class="text-xs">Essayez un autre mot-clé de recherche.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(w => createMiniCardHTML(w, false)).join('');
+        }
+
+        function filterDictionary() {
+            renderDictionary();
+        }
+
+        function filterCategory(cat) {
+            currentCategoryFilter = cat;
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-filter-btn px-3 py-1.5 rounded-lg bg-ink text-cream transition";
+                } else {
+                    btn.className = "cat-filter-btn px-3 py-1.5 rounded-lg bg-paper border border-borderPaper text-ink hover:bg-borderPaper/50 transition";
+                }
+            });
+            renderDictionary();
+        }
+
+        // HTML Generator for Word Cards in Grid View
+        function createMiniCardHTML(wordObj, isFavView) {
+            const isFav = favoriteIds.includes(wordObj.id);
+            return `
+                <div class="bg-cardBg border border-borderPaper rounded-2xl p-5 shadow-sm hover:shadow-cardHover transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-burgundy group-hover:text-gold transition">
+                                    ${wordObj.word}
+                                </h3>
+                                <span class="font-mono text-xs text-inkLight">${wordObj.phonetic || ''}</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button onclick="speakSpecificWord('${wordObj.word}')" title="Prononcer" class="p-2 text-inkLight hover:text-gold transition">
+                                    <i class="fa-solid fa-volume-high text-sm"></i>
+                                </button>
+                                <button onclick="toggleFavorite('${wordObj.id}')" title="Favori" class="p-2 text-inkLight hover:text-burgundy transition">
+                                    <i class="${isFav ? 'fa-solid text-burgundy' : 'fa-regular'} fa-bookmark text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-paper border border-borderPaper text-[11px] font-serif italic text-inkLight mb-3">
+                            ${wordObj.gram}
+                        </span>
+
+                        <p class="text-sm text-ink leading-relaxed mb-4">
+                            ${wordObj.definition}
+                        </p>
+                    </div>
+
+                    ${wordObj.example ? `
+                        <div class="pt-3 border-t border-borderPaper/40 bg-paper/30 -mx-5 -mb-5 p-4 rounded-b-2xl">
+                            <p class="font-serif italic text-xs text-inkLight">
+                                ${wordObj.example}
+                            </p>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // Custom Word Creation Modal
+        function openAddWordModal() {
+            document.getElementById('modal-add-word').classList.remove('hidden');
+        }
+
+        function closeAddWordModal() {
+            document.getElementById('modal-add-word').classList.add('hidden');
+            document.getElementById('form-add-word').reset();
+        }
+
+        function handleAddNewWord(e) {
+            e.preventDefault();
+            const wordInput = document.getElementById('input-word').value.trim();
+            const phoneticInput = document.getElementById('input-phonetic').value.trim();
+            const gramInput = document.getElementById('input-gram').value;
+            const defInput = document.getElementById('input-definition').value.trim();
+            const exampleInput = document.getElementById('input-example').value.trim();
+
+            if (!wordInput || !defInput) return;
+
+            const newWord = {
+                id: 'custom_' + Date.now(),
+                word: wordInput.toUpperCase(),
+                phonetic: phoneticInput ? (phoneticInput.startsWith('/') ? phoneticInput : `/ ${phoneticInput} /`) : '',
+                gram: gramInput,
+                definition: defInput,
+                example: exampleInput ? `« ${exampleInput.replace(/^[«"]\s*|\s*[»"]$/g, '')} »` : ''
+            };
+
+            saveCustomWords(newWord);
+            closeAddWordModal();
+            showToast(`Mot "${newWord.word}" ajouté au lexique !`, "fa-plus");
+            
+            // Display newly created word
+            displayCard(newWord);
+            switchTab('explore');
+        }
+
+        // Toast Notification System
+        function showToast(msg, iconClass = "fa-check-circle") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.textContent = msg;
+            toastIcon.className = `fa-solid ${iconClass} text-gold`;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
